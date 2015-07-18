@@ -1,0 +1,31 @@
+{
+  "name": "ckeditor-imgresize",
+  "version": "1.0.0",
+  "description": "CKEditor dragable image resizing with support divarea",
+  "keywords": [
+    "ckeditor",
+    "image",
+    "resizing"
+  ],
+  "main": "plugin.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Rikishi",
+    "email": "bufpost@yandex.ru",
+    "url": "https://github.com/Katochimoto"
+  },
+  "bugs": {
+    "url": "https://github.com/Katochimoto/ckeditor-imgresize/issues",
+    "email": "bufpost@yandex.ru"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Katochimoto/ckeditor-imgresize.git"
+  },
+  "license": "MIT"
+}
