@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var REG_CLASS_REPLACE = /(?:^|\s)(cke_imgresize[^\s]*)(?:\s|$)/g;
+    var REG_CLASS_REPLACE = /(?:^|\s+)cke_imgresize[^\s]*/g;
 
     CKEDITOR.plugins.add('imgresize', {
         modes: { 'wysiwyg': 1 },
@@ -62,6 +62,7 @@
             editor.on('contentDom', this._updateEvents);
             editor.on('readOnly', this._updateEvents);
             editor.on('mode', this._updateEvents);
+            editor.on('destroy', this._onDestroy);
         },
 
         afterInit: function(editor) {
@@ -74,14 +75,21 @@
                     'class': function(value, element) {
                         if (value.indexOf('cke_imgresize') !== -1) {
                             element.replaceWithChildren();
-                            return value.replace(REG_CLASS_REPLACE, ' ');
+                            return CKEDITOR.tools.ltrim(value.replace(REG_CLASS_REPLACE, ''));
                         }
                     }
                 }
             };
 
+            editor._imgresizeFilter = new CKEDITOR.htmlParser.filter(rules);
             editor.dataProcessor.htmlFilter.addRules(rules, { 'applyToAll': true, 'priority': 0 });
             editor.dataProcessor.dataFilter.addRules(rules, { 'applyToAll': true, 'priority': 0 });
+        },
+
+        _onDestroy: function() {
+            delete editor._imgresizeFilter;
+            delete editor._imgresize;
+            delete editor._imgresizeWrapper;
         },
 
         _updateEvents: function() {
@@ -103,7 +111,7 @@
 
             var fragment = CKEDITOR.htmlParser.fragment.fromHtml(event.data);
             var writer = new CKEDITOR.htmlParser.basicWriter();
-            fragment.filter(this.dataProcessor.htmlFilter);
+            fragment.filter(this._imgresizeFilter);
             fragment.writeHtml(writer);
 
             event.data = writer.getHtml();
@@ -135,6 +143,7 @@
     Resizer.prototype._editorHideEvents = {
         'beforeCommandExec': 1,
         'beforeSetMode': 1,
+        'destroy': 1,
         'dragstart': 1,
         'paste': 1,
         'readOnly': 1
