@@ -27,5 +27,6 @@
     "type": "git",
     "url": "git@github.com:Katochimoto/ckeditor-imgresize.git"
   },
+  "homepage": "http://katochimoto.github.io/ckeditor-imgresize/",
   "license": "MIT"
 }

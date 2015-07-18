@@ -1,0 +1,30 @@
+{
+    "name": "ckeditor-imgresize",
+    "version": "1.0.0",
+    "main": [
+        "plugin.js"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "Makefile",
+        "package.json",
+        "karma.conf.js"
+    ],
+    "homepage": "http://katochimoto.github.io/ckeditor-imgresize/",
+    "authors": [
+        "rikishi <bufpost@yandex.ru>"
+    ],
+    "description": "CKEditor dragable image resizing with support divarea",
+    "moduleType": [
+        "globals"
+    ],
+    "keywords": [
+        "ckeditor",
+        "image",
+        "resizing"
+    ],
+    "license": "MIT"
+}
