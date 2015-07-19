@@ -87,18 +87,13 @@
 
         _updateEvents: function() {
             var plugin = this.plugins.imgresize;
+            var editable = this.editable();
 
-            if (this.document) {
-                this.document.removeListener('click', plugin._onClick);
-            }
-
+            editable.removeListener('click', plugin._onClick);
             this.removeListener('loadSnapshot', plugin._onLoadSnapshot);
 
             if (!this.readOnly && this.mode === 'wysiwyg') {
-                if (this.document) {
-                    this.document.on('click', plugin._onClick, this);
-                }
-
+                editable.on('click', plugin._onClick, this);
                 this.on('loadSnapshot', plugin._onLoadSnapshot, this, null, 5);
             }
         },
@@ -386,6 +381,10 @@
     };
 
     DragEvent.prototype._onMousemove = function(event) {
+        var nativeEvent = event.data.$;
+        nativeEvent.stopImmediatePropagation();
+        nativeEvent.preventDefault();
+
         this._update(event);
         this._wrapper.fire('drag:drag', {
             'attr': this._attr,
@@ -399,6 +398,10 @@
     };
 
     DragEvent.prototype._onMouseup = function(event) {
+        var nativeEvent = event.data.$;
+        nativeEvent.stopImmediatePropagation();
+        nativeEvent.preventDefault();
+
         this._update(event);
         this._editor.document.removeListener('mousemove', this._onMousemove);
         this._editor.document.removeListener('mouseup', this._onMouseup);
