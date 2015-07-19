@@ -62,7 +62,6 @@
             editor.on('contentDom', this._updateEvents);
             editor.on('readOnly', this._updateEvents);
             editor.on('mode', this._updateEvents);
-            editor.on('destroy', this._onDestroy);
         },
 
         afterInit: function(editor) {
@@ -84,12 +83,6 @@
             editor._imgresizeFilter = new CKEDITOR.htmlParser.filter(rules);
             editor.dataProcessor.htmlFilter.addRules(rules, { 'applyToAll': true, 'priority': 0 });
             editor.dataProcessor.dataFilter.addRules(rules, { 'applyToAll': true, 'priority': 0 });
-        },
-
-        _onDestroy: function() {
-            delete editor._imgresizeFilter;
-            delete editor._imgresize;
-            delete editor._imgresizeWrapper;
         },
 
         _updateEvents: function() {
@@ -196,7 +189,6 @@
 
     Resizer.prototype._onKeydown = function(event) {
         var nativeEvent = event.data.$;
-
         if (!nativeEvent.shiftKey) {
             this._hideWrapper();
         }
