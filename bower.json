@@ -1,6 +1,6 @@
 {
     "name": "ckeditor-imgresize",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "main": [
         "plugin.js"
     ],
