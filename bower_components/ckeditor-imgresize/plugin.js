@@ -95,11 +95,17 @@
         _updateEvents: function() {
             var plugin = this.plugins.imgresize;
 
-            this.document && this.document.removeListener('click', plugin._onClick);
+            if (this.document) {
+                this.document.removeListener('click', plugin._onClick);
+            }
+
             this.removeListener('loadSnapshot', plugin._onLoadSnapshot);
 
             if (!this.readOnly && this.mode === 'wysiwyg') {
-                this.document && this.document.on('click', plugin._onClick, this);
+                if (this.document) {
+                    this.document.on('click', plugin._onClick, this);
+                }
+
                 this.on('loadSnapshot', plugin._onLoadSnapshot, this, null, 5);
             }
         },
@@ -159,7 +165,10 @@
             this._element.appendTo(this._wrapper);
         }
 
-        this._editor.getSelection().removeAllRanges();
+        var selection = this._editor.getSelection();
+        selection.removeAllRanges();
+        selection.selectElement(this._wrapper);
+
         this._wrapper.focus();
 
         this._controls = this._wrapper.findOne('.cke_imgresize_controls');
@@ -170,6 +179,7 @@
         this._wrapper.on('drag:stop', this._onDragStop, this);
         this._wrapper.on('mousedown', this._initDrag, this, null, 0);
         this._wrapper.once('blur', this._hideWrapper, this, null, 0);
+        this._wrapper.once('keydown', this._onKeydown, this, null, 0);
 
         for (var eventName in this._editorHideEvents) {
             this._editor.once(eventName, this._hideWrapper, this, null, 0);
@@ -182,6 +192,14 @@
             'width': this._box.width + 'px',
             'height': this._box.height + 'px'
         });
+    };
+
+    Resizer.prototype._onKeydown = function(event) {
+        var nativeEvent = event.data.$;
+
+        if (!nativeEvent.shiftKey) {
+            this._hideWrapper();
+        }
     };
 
     Resizer.prototype._hideWrapper = function() {
@@ -347,9 +365,7 @@
             'y': nativeEvent.clientY
         };
         this._keys = {
-            'shift': nativeEvent.shiftKey,
-            'ctrl': nativeEvent.ctrlKey,
-            'alt': nativeEvent.altKey
+            'shift': nativeEvent.shiftKey
         };
 
         this._update(event);
