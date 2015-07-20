@@ -350,34 +350,44 @@
     function DragEvent(editor, wrapper) {
         this._editor = editor;
         this._wrapper = wrapper;
+        this._isIframe = (window.document !== this._editor.document.$);
+        this._contents = this._editor.ui.space('contents');
+        this._document = new CKEDITOR.dom.element(window.document);
     }
 
     DragEvent.prototype.start = function(event) {
         var nativeEvent = event.data.$;
 
         this._attr = nativeEvent.target.getAttribute('data-cke-imgresize');
-        this._startPos = {
-            'x': nativeEvent.clientX,
-            'y': nativeEvent.clientY
-        };
-        this._keys = {
-            'shift': nativeEvent.shiftKey
-        };
-
-        this._update(event);
+        this._startPos = { 'x': nativeEvent.clientX, 'y': nativeEvent.clientY };
+        this._keys = { 'shift': nativeEvent.shiftKey };
 
         this._editor.document.on('mousemove', this._onMousemove, this, null, 0);
         this._editor.document.on('mouseup', this._onMouseup, this, null, 0);
+
+        if (this._isIframe) {
+            this._document.on('mousemove', this._onMousemove, this, null, 0);
+            this._document.on('mouseup', this._onMouseup, this, null, 0);
+        }
+
         this._wrapper.fire('drag:start');
     };
 
     DragEvent.prototype._update = function(event) {
         var nativeEvent = event.data.$;
+        var offsetTop = 0;
+        var offsetLeft = 0;
 
-        this._delta = {
-            'x': nativeEvent.clientX - this._startPos.x,
-            'y': nativeEvent.clientY - this._startPos.y
-        };
+        if (this._isIframe && event.sender.$ === window.document) {
+            var rect = this._contents.$.getBoundingClientRect();
+            offsetTop = Math.round(rect.top);
+            offsetLeft = Math.round(rect.left);
+        }
+
+        var x = nativeEvent.clientX - this._startPos.x - offsetLeft;
+        var y = nativeEvent.clientY - this._startPos.y - offsetTop;
+
+        return { 'x': x, 'y': y };
     };
 
     DragEvent.prototype._onMousemove = function(event) {
@@ -385,10 +395,11 @@
         nativeEvent.stopImmediatePropagation();
         nativeEvent.preventDefault();
 
-        this._update(event);
+        var delta = this._update(event);
+
         this._wrapper.fire('drag:drag', {
             'attr': this._attr,
-            'delta': this._delta,
+            'delta': delta,
             'keys': this._keys
         });
 
@@ -402,12 +413,19 @@
         nativeEvent.stopImmediatePropagation();
         nativeEvent.preventDefault();
 
-        this._update(event);
         this._editor.document.removeListener('mousemove', this._onMousemove);
         this._editor.document.removeListener('mouseup', this._onMouseup);
+
+        if (this._isIframe) {
+            this._document.removeListener('mousemove', this._onMousemove);
+            this._document.removeListener('mouseup', this._onMouseup);
+        }
+
+        var delta = this._update(event);
+
         this._wrapper.fire('drag:stop', {
             'attr': this._attr,
-            'delta': this._delta,
+            'delta': delta,
             'keys': this._keys
         });
     };
