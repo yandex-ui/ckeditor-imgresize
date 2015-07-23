@@ -21,7 +21,9 @@
     </section>
 
     <section class="main-content">
-      <textarea id="editor"></textarea>
+      <textarea id="editor1"></textarea>
+      <br/><br/>
+      <textarea id="editor2"></textarea>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Katochimoto/ckeditor-imgresize">Ckeditor-imgresize</a> is maintained by <a href="https://github.com/Katochimoto">Katochimoto</a>.</span>
@@ -32,21 +34,31 @@
     </section>
 
     <script>
-        CKEDITOR.replace('editor', {
-            extraPlugins: 'imgresize,divarea',//
-
-            autoUpdateElement: false,
+        CKEDITOR.replace('editor1', {
+            extraPlugins: 'imgresize,divarea',
             customConfig: false,
-            disableNativeSpellChecker: false,
-            dialog_magnetDistance: 0,
-            dialog_backgroundCoverColor: 'black',
-            dialog_backgroundCoverOpacity: .5,
             toolbar: [
-                ['Bold', 'Italic', 'Underline', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote', 'HorizontalRule', 'RemoveFormat', '-', 'Link', 'Unlink', '-', 'Image'],
-                '/',
-                ['Undo', 'Redo', '-', 'Format', 'Font', 'FontSize', '-', 'TextColor', 'BGColor', '-', 'PasteText',
-                'PasteFromWord', 'SpecialChar', '-', 'Source']
-            ],
+        		{ name: 'document', items: [ 'Source' ] },
+        		{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+        		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+        		{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor', 'Image' ] },
+        	],
+            on: {
+                instanceReady: function() {
+                    this.setData('<p><img src="http://placehold.it/200x150"> This content will be replaced with the editor.</p>');
+                }
+            }
+        });
+
+        CKEDITOR.replace('editor2', {
+            extraPlugins: 'imgresize',
+            customConfig: false,
+            toolbar: [
+        		{ name: 'document', items: [ 'Source' ] },
+        		{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+        		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+        		{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor', 'Image' ] },
+        	],
             on: {
                 instanceReady: function() {
                     this.setData('<p><img src="http://placehold.it/200x150"> This content will be replaced with the editor.</p>');
