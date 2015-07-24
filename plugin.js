@@ -392,7 +392,7 @@
 
     DragEvent.prototype._onMousemove = function(event) {
         var nativeEvent = event.data.$;
-        nativeEvent.stopImmediatePropagation();
+        nativeEvent.stopPropagation();
         nativeEvent.preventDefault();
 
         var delta = this._update(event);
@@ -410,7 +410,7 @@
 
     DragEvent.prototype._onMouseup = function(event) {
         var nativeEvent = event.data.$;
-        nativeEvent.stopImmediatePropagation();
+        nativeEvent.stopPropagation();
         nativeEvent.preventDefault();
 
         this._editor.document.removeListener('mousemove', this._onMousemove);
