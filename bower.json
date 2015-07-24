@@ -1,8 +1,8 @@
 {
   "name": "ckeditor-imgresize-web",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "dependencies": {
-    "ckeditor-imgresize": "1.0.7"
+    "ckeditor-imgresize": "1.0.8"
   },
   "directory": "bower_components"
 }
