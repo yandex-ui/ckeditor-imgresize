@@ -362,12 +362,16 @@
         this._startPos = { 'x': nativeEvent.clientX, 'y': nativeEvent.clientY };
         this._keys = { 'shift': nativeEvent.shiftKey };
 
-        this._editor.document.on('mousemove', this._onMousemove, this, null, 0);
-        this._editor.document.on('mouseup', this._onMouseup, this, null, 0);
+        this._document.on('mousemove', this._onMousemove, this, null, 0);
+        this._document.on('mouseup', this._onMouseup, this, null, 0);
 
         if (this._isIframe) {
-            this._document.on('mousemove', this._onMousemove, this, null, 0);
-            this._document.on('mouseup', this._onMouseup, this, null, 0);
+            this._editor.document.on('mousemove', this._onMousemove, this, null, 0);
+            this._editor.document.on('mouseup', this._onMouseup, this, null, 0);
+
+        } else {
+            this._editor.container.on('mousemove', this._onMousemove, this, null, 0);
+            this._editor.container.on('mouseup', this._onMouseup, this, null, 0);
         }
 
         this._wrapper.fire('drag:start');
@@ -413,12 +417,16 @@
         nativeEvent.stopPropagation();
         nativeEvent.preventDefault();
 
-        this._editor.document.removeListener('mousemove', this._onMousemove);
-        this._editor.document.removeListener('mouseup', this._onMouseup);
+        this._document.removeListener('mousemove', this._onMousemove);
+        this._document.removeListener('mouseup', this._onMouseup);
 
         if (this._isIframe) {
-            this._document.removeListener('mousemove', this._onMousemove);
-            this._document.removeListener('mouseup', this._onMouseup);
+            this._editor.document.removeListener('mousemove', this._onMousemove);
+            this._editor.document.removeListener('mouseup', this._onMouseup);
+
+        } else {
+            this._editor.container.removeListener('mousemove', this._onMousemove);
+            this._editor.container.removeListener('mouseup', this._onMouseup);
         }
 
         var delta = this._update(event);
