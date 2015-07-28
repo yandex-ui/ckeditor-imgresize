@@ -135,12 +135,12 @@
     }
 
     Resizer.prototype._editorHideEvents = {
-        'beforeCommandExec': 1,
-        'beforeSetMode': 1,
-        'destroy': 1,
-        'dragstart': 1,
-        'paste': 1,
-        'readOnly': 1
+        'beforeCommandExec': { 'restoreFocus': true },
+        'beforeSetMode': null,
+        'destroy': null,
+        'dragstart': null,
+        'paste': null,
+        'readOnly': null
     };
 
     Resizer.prototype.show = function(element) {
@@ -170,7 +170,7 @@
         this._wrapper.once('keydown', this._onKeydown, this, null, 0);
 
         for (var eventName in this._editorHideEvents) {
-            this._editor.once(eventName, this._hideWrapper, this, null, 0);
+            this._editor.once(eventName, this._hideWrapper, this, this._editorHideEvents[ eventName ], 0);
         }
 
         this._resetBox();
@@ -185,10 +185,14 @@
     Resizer.prototype._onKeydown = function(event) {
         var nativeEvent = event.data.$;
         if (!nativeEvent.shiftKey) {
-            this._hideWrapper({ 'restoreFocus': true });
+            this._hideWrapper({ 'listenerData': { 'restoreFocus': true } });
         }
     };
 
+    /**
+	 * @param {CKEDITOR.eventInfo} event
+	 * @param {{ restoreFocus: boolean }} [event.listenerData]
+	 */
     Resizer.prototype._hideWrapper = function(event) {
         if (!this._wrapper) {
             return;
@@ -200,12 +204,13 @@
 
         this._wrapper.removeAllListeners();
 
+        var listenerData = event.listenerData;
         var selection = this._editor.getSelection();
         selection.removeAllRanges();
 
         this._element.replace(this._wrapper);
 
-        if (event && event.restoreFocus) {
+        if (listenerData && listenerData.restoreFocus) {
             selection.selectElement(this._element);
             this._element.focus();
         }
