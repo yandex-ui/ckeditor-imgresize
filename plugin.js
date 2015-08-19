@@ -166,7 +166,7 @@
         this._wrapper.on('drag:drag', this._onDragDrag, this);
         this._wrapper.on('drag:stop', this._onDragStop, this);
         this._wrapper.on('mousedown', this._initDrag, this, null, 0);
-        this._wrapper.once('blur', this._hideWrapper, this, null, 0);
+        this._wrapper.once('blur', this._hideWrapper, this, { 'restoreFocus': true }, 0);
         this._wrapper.once('keydown', this._onKeydown, this, null, 0);
 
         for (var eventName in this._editorHideEvents) {
