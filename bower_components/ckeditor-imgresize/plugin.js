@@ -165,6 +165,11 @@
             this._element.appendTo(this._wrapper);
         }
 
+        var align = this._element.getStyle('float') || this._element.getAttribute('align');
+        if (align) {
+            this._wrapper.setStyles({ 'float': align });
+        }
+
         selection.selectElement(this._wrapper);
         this._wrapper.focus();
 
