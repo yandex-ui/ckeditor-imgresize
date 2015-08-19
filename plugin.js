@@ -122,7 +122,7 @@
                 return;
             }
 
-            this._imgresize.show(new CKEDITOR.dom.element(nativeEvent.target));
+            this._imgresize.toggle(new CKEDITOR.dom.element(nativeEvent.target));
         }
     });
 
@@ -138,12 +138,21 @@
         'beforeCommandExec': { 'restoreFocus': true },
         'beforeSetMode': null,
         'destroy': null,
-        'dragstart': null,
+        'dragstart': { 'restoreFocus': true },
         'paste': null,
         'readOnly': null
     };
 
-    Resizer.prototype.show = function(element) {
+    Resizer.prototype.toggle = function(element) {
+        if (this._wrapper) {
+            this._hideWrapper({ 'listenerData': { 'restoreFocus': true } });
+
+        } else {
+            this._showWrapper(element);
+        }
+    };
+
+    Resizer.prototype._showWrapper = function(element) {
         this._element = element;
         this._wrapper = this._getWrapper(this._element);
 
@@ -162,8 +171,8 @@
         this._controls = this._wrapper.findOne('.cke_imgresize_controls');
         this._preview = this._wrapper.findOne('.cke_imgresize_preview');
 
-        this._wrapper.on('drag:start', this._onDragStart, this);
         this._wrapper.on('drag:drag', this._onDragDrag, this);
+        this._wrapper.on('drag:start', this._onDragStart, this);
         this._wrapper.on('drag:stop', this._onDragStop, this);
         this._wrapper.on('mousedown', this._initDrag, this, null, 0);
         this._wrapper.once('blur', this._hideWrapper, this, { 'restoreFocus': true }, 0);
