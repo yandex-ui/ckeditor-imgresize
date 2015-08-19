@@ -180,6 +180,9 @@
         this._wrapper.on('drag:start', this._onDragStart, this);
         this._wrapper.on('drag:stop', this._onDragStop, this);
         this._wrapper.on('mousedown', this._initDrag, this, null, 0);
+        // в сафари при перетаскивании картинки с врапером возникает js ошибка
+        // при определении range, когда врапер удаляется
+        // поэтому после удаления врапера необходимо выделить картинку
         this._wrapper.once('blur', this._hideWrapper, this, { 'restoreFocus': true }, 0);
         this._wrapper.once('keydown', this._onKeydown, this, null, 0);
 
