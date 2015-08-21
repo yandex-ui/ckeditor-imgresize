@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+        window.CKEDITOR_BASEPATH = '../node_modules/ckeditor/dist/ckeditor/';
+    </script>
+    <script src="../node_modules/lodash/index.js"></script>
+    <script src="../node_modules/vow/vow.min.js"></script>
+    <script src="../node_modules/ckeditor/dist/ckeditor-full.js"></script>
+    <script src="../plugin.js"></script>
+</head>
+<body>
+    <textarea id="editor"></textarea>
+<script>
+(function() {
+    var content = '<h2>Offices parties lasting outward nothing age few resolve</h2>' +
+            '<p><img src="http://placehold.it/200x150"> Doubtful two bed way pleasure confined followed. Shew up ye away no eyes life or were this. Perfectly did suspicion daughters but his intention. Started on society an brought it explain. Position two saw greatest stronger old. Pianoforte if at simplicity do estimating.</p>' +
+            '<p>Up branch to easily missed by do. Admiration considered acceptance too led one melancholy expression. Are will took form the nor true. Winding enjoyed minuter her letters evident use eat colonel. He attacks observe mr cottage inquiry am examine gravity. Are dear but near left was. Year kept on over so as this of. She steepest doubtful betrayed formerly him. Active one called uneasy our seeing see cousin tastes its. Ye am it formed indeed agreed relied piqued.</p>' +
+            '<p>Building mr concerns servants in he outlived am breeding. He so lain good miss when sell some at if. Told hand so an rich gave next. How doubt yet again see son smart. While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old.</p>' +
+            '<p>Wise busy past both park when an ye no. <img src="http://placehold.it/200x150" align="left"> Nay likely her length sooner thrown sex lively income. The expense windows adapted sir. Wrong widen drawn ample eat off doors money. Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her. Six curiosity day assurance bed necessary.</p>' +
+            '<p>Attention he extremity unwilling on otherwise. Conviction up partiality as delightful is discovered. Yet jennings resolved disposed exertion you off. Left did fond drew fat head poor. So if he into shot half many long. China fully him every fat was world grave.</p>' +
+            '<p>Depart do be so he enough talent. Sociable formerly six but handsome. Up do view time they shot. He concluded disposing provision by questions as situation. Its estimating are motionless day sentiments end. Calling an imagine at forbade. At name no an what like spot. Pressed my by do affixed he studied.</p>' +
+            '<p>Questions explained agreeable preferred strangers too him her son. <img src="http://placehold.it/200x150" align="right"> Set put shyness offices his females him distant. Improve has message besides shy himself cheered however how son. Quick judge other leave ask first chief her. Indeed or remark always silent seemed narrow be. Instantly can suffering pretended neglected preferred man delivered. Perhaps fertile brandon do imagine to cordial cottage.</p>' +
+            '<p>For who thoroughly her boy estimating conviction. Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection favourable mrs can projecting own. Thirty it matter enable become admire in giving. See resolved goodness felicity shy civility domestic had but. Drawings offended yet answered jennings perceive laughing six did far.</p>' +
+            '<p>Silent sir say desire fat him letter. Whatever settling goodness too and honoured she building answered her. Strongly thoughts remember mr to do consider debating. Spirits musical behaved on we he farther letters. Repulsive he he as deficient newspaper dashwoods we. Discovered her his pianoforte insipidity entreaties. Began he at terms meant as fancy. Breakfast arranging he if furniture we described on. Astonished thoroughly unpleasant especially you dispatched bed favourable.</p>';
+
+    var config = {
+        'themeResetAll': false,
+        'language': 'ru',
+        'enableHotkeys': true,
+        'title': '',
+        'height': 500,
+        'extraPlugins': 'imgresize',
+        'on': {
+            'instanceReady': function() {
+                this.setData(content);
+            }
+        }
+    };
+
+    CKEDITOR.editorConfig(config);
+
+    CKEDITOR.replace('editor', config);
+}());
+</script>
+</body>
+</html>
