@@ -15,7 +15,7 @@
                 '.cke_imgresize_wrapper > img::selection {color:rgba(0,0,0,0);}' +
                 '.cke_imgresize_wrapper > img {outline:1px solid #000;border:none;}' +
 
-                '.cke_imgresize_wrapper {position:relative;display:inline-block;outline:none;}' +
+                '.cke_imgresize_wrapper {position:relative;display:inline-block;outline:none;font-size:1px;}' +
                 '.cke_imgresize_controls > i {visibility:visible;position:absolute;display:block;width:5px;height:5px;background:#fff;border:1px solid #000;}' +
                 '.cke_imgresize_controls > i.active, .cke_imgresize_controls > i:hover {background:#000;}' +
                 '.cke_imgresize_br, .cke_imgresize_tl {cursor:nwse-resize;}' +

@@ -1,6 +1,6 @@
 {
   "name": "ckeditor-imgresize",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "CKEditor dragable image resizing with support divarea",
   "keywords": [
     "ckeditor",
@@ -20,18 +20,18 @@
     "url": "https://github.com/Katochimoto"
   },
   "bugs": {
-    "url": "https://github.com/Katochimoto/ckeditor-imgresize/issues",
+    "url": "https://github.com/yandex-ui/ckeditor-imgresize/issues",
     "email": "bufpost@yandex.ru"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Katochimoto/ckeditor-imgresize.git"
+    "url": "git://github.com/yandex-ui/ckeditor-imgresize.git"
   },
   "devDependencies": {
     "vow": "0.4.10",
     "lodash": "3.10.1",
-    "ckeditor": "git://github.com/Katochimoto/ckeditor.git"
+    "ckeditor": "yandex-ui/ckeditor.git"
   },
-  "homepage": "http://katochimoto.github.io/ckeditor-imgresize/",
+  "homepage": "http://yandex-ui.github.io/ckeditor-imgresize/",
   "license": "MIT"
 }
