@@ -1,6 +1,6 @@
 {
   "name": "ckeditor-imgresize",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": [
     "plugin.js"
   ],
@@ -13,7 +13,7 @@
     "package.json",
     "karma.conf.js"
   ],
-  "homepage": "http://katochimoto.github.io/ckeditor-imgresize/",
+  "homepage": "http://yandex-ui.github.io/ckeditor-imgresize/",
   "authors": [
     {
       "name": "Rikishi",
@@ -32,16 +32,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/Katochimoto/ckeditor-imgresize.git"
+    "url": "git://github.com/yandex-ui/ckeditor-imgresize.git"
   },
   "license": "MIT",
-  "_release": "1.0.13",
+  "_release": "1.0.14",
   "_resolution": {
     "type": "version",
-    "tag": "1.0.13",
-    "commit": "ceba202b65454d74e6a5056586a931b36e0b1479"
+    "tag": "1.0.14",
+    "commit": "a4b1c3900c6ae6b81647492eb228fecde86ea703"
   },
   "_source": "git://github.com/Katochimoto/ckeditor-imgresize.git",
-  "_target": "1.0.13",
+  "_target": "1.0.14",
   "_originalSource": "ckeditor-imgresize"
 }
