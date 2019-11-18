@@ -9,9 +9,9 @@
         onLoad: function() {
             CKEDITOR.addCss(
                 '.cke_imgresize_wrapper > img::selection {color:rgba(0,0,0,0);}' +
-                '.cke_imgresize_wrapper > img {outline:1px solid #000;border:none;}' +
+                '.cke_imgresize_wrapper > img {outline:1px solid #000;border:none;pointer-events:none;}' +
 
-                '.cke_imgresize_wrapper {position:relative;display:inline-block;outline:none;font-size:1px;}' +
+                '.cke_imgresize_wrapper {position:relative;display:inline-block;outline:none;font-size:1px;margin:3px;}' +
                 '.cke_imgresize_controls > i {visibility:visible;position:absolute;display:block;width:5px;height:5px;background:#fff;border:1px solid #000;}' +
                 '.cke_imgresize_controls > i.active, .cke_imgresize_controls > i:hover {background:#000;}' +
                 '.cke_imgresize_br, .cke_imgresize_tl {cursor:nwse-resize;}' +
@@ -140,6 +140,16 @@
         }
     };
 
+    Resizer.prototype._setContentEditable = function(isEnable) {
+        const container = this._editor && this._editor.container;
+        const wysiwygDiv = container && container.find('.cke_wysiwyg_div').$[0];
+        if (!wysiwygDiv) {
+            return;
+        }
+
+        wysiwygDiv.setAttribute('contenteditable', isEnable);
+    }
+
     Resizer.prototype._showWrapper = function(element) {
         this._element = element;
         this._wrapper = this._getWrapper(this._element);
@@ -185,6 +195,8 @@
             'width': this._box.width + 'px',
             'height': this._box.height + 'px'
         });
+
+        this._setContentEditable(false);
     };
 
     Resizer.prototype._onKeydown = function(event) {
@@ -224,6 +236,8 @@
         delete this._element;
         delete this._controls;
         delete this._preview;
+
+        this._setContentEditable(true);
     };
 
     Resizer.prototype._getWrapper = function(element) {
