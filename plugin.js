@@ -7,10 +7,6 @@
         modes: { 'wysiwyg': 1 },
 
         onLoad: function() {
-            if (!CKEDITOR.env.webkit) {
-                return;
-            }
-
             CKEDITOR.addCss(
                 '.cke_imgresize_wrapper > img::selection {color:rgba(0,0,0,0);}' +
                 '.cke_imgresize_wrapper > img {outline:1px solid #000;border:none;}' +
@@ -38,10 +34,6 @@
         },
 
         init: function(editor) {
-            if (!CKEDITOR.env.webkit) {
-                return;
-            }
-
             editor._imgresize = new Resizer(editor);
             editor._imgresizeWrapper = CKEDITOR.dom.element.createFromHtml(
                 '<span tabindex="-1" class="cke_imgresize_wrapper" data-cke-imgresize-wrapper="1" data-cke-filter="off">' +
@@ -65,10 +57,6 @@
         },
 
         afterInit: function(editor) {
-            if (!CKEDITOR.env.webkit) {
-                return;
-            }
-
             var rules = {
                 'attributes': {
                     'class': function(value, element) {
