@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "vow": "0.4.10",
-    "lodash": "3.10.1",
+    "lodash": "4.17.19",
     "ckeditor": "yandex-ui/ckeditor.git"
   },
   "homepage": "http://yandex-ui.github.io/ckeditor-imgresize/",
